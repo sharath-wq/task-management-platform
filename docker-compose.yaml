@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: task-management-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/task_management
+      - JWT_TOKEN=8db8f85991bb28f45ac0107f2a1b349c
+      - NODE_ENV=development
+      - CLIENT_URL=http://localhost:5173
+    depends_on:
+      - mongo
+    networks:
+      - task-management-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: task-management-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - task-management-network
+
+  mongo:
+    image: mongo:latest
+    container_name: task-management-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - task-management-network
+
+volumes:
+  mongo-data:
+
+networks:
+  task-management-network:
+    driver: bridge

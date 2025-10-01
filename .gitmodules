@@ -1,0 +1,6 @@
+[submodule "task-management-platform-backend"]
+	path = task-management-platform-backend
+	url = git@github.com:sharath-wq/task-management-platform-backend.git
+[submodule "task-management-platform-frontend"]
+	path = task-management-platform-frontend
+	url = git@github.com:sharath-wq/task-management-platform-frontend.git
