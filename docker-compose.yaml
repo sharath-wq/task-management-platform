@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend
+      context: ./task-management-platform-backend
       dockerfile: Dockerfile
     container_name: task-management-backend
     ports:
@@ -23,7 +23,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./task-management-platform-frontend
       dockerfile: Dockerfile
     container_name: task-management-frontend
     ports:
